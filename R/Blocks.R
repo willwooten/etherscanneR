@@ -34,4 +34,12 @@ estimated_block_countdown <- function(block_num, api_key){
   }
 }
 
+# Get Block Number by Timestamp
+# [Parameters] timestamp format: Unix timestamp (supports Unix timestamps in seconds), closest value: 'before' or 'after'
+
+get_block_num_by_timestamp <- function(timestamp, api_key, closest = "before"){
+  url <- paste0("https://api.etherscan.io/api?module=block&action=getblocknobytime&timestamp=", timestamp, "&closest=", closest, "&apikey=", api_key)
+  jsonlite::fromJSON(url)$result
+}
+
 
