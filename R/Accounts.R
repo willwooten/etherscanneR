@@ -46,8 +46,8 @@ get_erc20_transfers_by_address <- function(address, api_key, start_block = 0, en
 
 # Get a list of "ERC20 - Token Transfer Events" by Contract Address
 
-get_erc20_transfers_by_contract <- function(contract_address, api_key){
-  url <- paste0("https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=", contract_address,"&page=1&sort=asc&apikey=", api_key)
+get_erc20_transfers_by_contract <- function(contract_address, api_key, sort = "asc", page = 1){
+  url <- paste0("https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=", contract_address,"&page=", page, "&sort=", sort, "&apikey=", api_key)
   jsonlite::fromJSON(url)$result
 }
 
