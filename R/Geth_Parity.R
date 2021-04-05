@@ -143,6 +143,6 @@ eth_get_tx_count <- function(address, api_key){
 eth_gas_price <- function(api_key){
   url <- paste0("https://api.etherscan.io/api?module=proxy&action=eth_gasPrice&apikey=", api_key)
   as.numeric(jsonlite::fromJSON(url)$result) / 1000000000
-}
+} 
 
 
