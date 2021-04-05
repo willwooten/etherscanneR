@@ -105,8 +105,6 @@ eth_get_tx_by_hash <- function(tx_hash, api_key){
   )
 }
 
-
-
 # eth_getTransactionByBlockNumberAndIndex
 # Returns information about a transaction by block number and transaction index position
 
@@ -130,4 +128,13 @@ eth_get_tx_by_blocknumber_index <- function(block_hex, index, api_key){
     tx_s = df$s
   )
 }
+
+# eth_getTransactionCount
+# Returns the number of transactions sent from an address
+
+eth_get_tx_count <- function(address, api_key){
+  url <- paste0("https://api.etherscan.io/api?module=proxy&action=eth_getTransactionCount&address=", address,"&tag=latest&apikey=", api_key)
+  as.numeric(jsonlite::fromJSON(url)$result)
+}
+
 
