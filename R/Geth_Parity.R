@@ -44,10 +44,11 @@ eth_get_block_by_number <- function(block_hex, api_key){
 
 # eth_getUncleByBlockNumberAndIndex
 # Returns information about a uncle by block number
+# index must be hash
 
-eth_get_uncle_by_block_hex_index <- function(block_hex, index = "0x0", api_key){
+eth_get_uncle_by_block_hex_index <- function(block_hex, index = 0, api_key){
   df_list <- list()
-  url <- paste0("https://api.etherscan.io/api?module=proxy&action=eth_getUncleByBlockNumberAndIndex&tag=", block_hex ,"&index=", index, "&apikey=", api_key)
+  url <- paste0("https://api.etherscan.io/api?module=proxy&action=eth_getUncleByBlockNumberAndIndex&tag=", block_hex ,"&index=0x", index, "&apikey=", api_key)
   df <- jsonlite::fromJSON(url)$result
   df_list[[1]] <- data.frame(
     difficulty = df$difficulty, 
@@ -94,6 +95,31 @@ eth_get_tx_by_hash <- function(tx_hash, api_key){
     tx_gas_price = df$gasPrice, 
     tx_hash = df$hash, 
     tx_input = df$input, 
+    tx_nonce = df$nonce, 
+    tx_to = df$to, 
+    tx_index = df$transactionIndex, 
+    tx_value = df$value, 
+    tx_v = df$v, 
+    tx_r = df$r, 
+    tx_s = df$s
+  )
+}
+
+
+
+# eth_getTransactionByBlockNumberAndIndex
+# Returns information about a transaction by block number and transaction index position
+
+eth_get_tx_by_blocknumber_index <- function(block_hex, index, api_key){
+  url <- paste0("https://api.etherscan.io/api?module=proxy&action=eth_getTransactionByBlockNumberAndIndex&tag=", block_hex , "&index=0x", index,"&apikey=", api_key)
+  df <- jsonlite::fromJSON(url)$result
+  data.frame(
+    bloch_hash = df$blockHash, 
+    block_num = df$blockNumber, 
+    tx_from = df$from, 
+    tx_gas = df$gas, 
+    tx_gas_price = df$gasPrice, 
+    tx_hash = df$hash, 
     tx_input = df$input, 
     tx_nonce = df$nonce, 
     tx_to = df$to, 
