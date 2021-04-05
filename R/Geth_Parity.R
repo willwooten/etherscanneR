@@ -72,3 +72,38 @@ eth_get_uncle_by_block_hex_index <- function(block_hex, index = "0x0", api_key){
   df_list
 }
 
+# eth_getBlockTransactionCountByNumber
+# Returns the number of transactions in a block from a block matching the given block number
+
+eth_get_block_tx_count_by_hex <- function(block_hex, api_key){
+  url <- paste0("https://api.etherscan.io/api?module=proxy&action=eth_getBlockTransactionCountByNumber&tag=", block_hex, "&apikey=", api_key)
+  as.numeric(jsonlite::fromJSON(url)$result)
+}
+
+
+
+# eth_getTransactionByHash
+# Returns the information about a transaction requested by transaction hash
+
+eth_get_tx_by_hash <- function(tx_hash, api_key){
+  url <- paste0("https://api.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=", tx_hash, "&apikey=", api_key)
+  df <- jsonlite::fromJSON(url)$result
+  data.frame(
+    bloch_hash = df$blockHash, 
+    block_num = df$blockNumber, 
+    tx_from = df$from, 
+    tx_gas = df$gas, 
+    tx_gas_price = df$gasPrice, 
+    tx_hash = df$hash, 
+    tx_input = df$input, 
+    tx_input = df$input, 
+    tx_nonce = df$nonce, 
+    tx_to = df$to, 
+    tx_index = df$transactionIndex, 
+    tx_value = df$value, 
+    tx_v = df$v, 
+    tx_r = df$r, 
+    tx_s = df$s
+  )
+}
+
