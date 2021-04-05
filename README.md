@@ -1,2 +1,2 @@
 # etherscanneR
-R for Etherscan,io API
+R for Etherscan.io API
