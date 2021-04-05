@@ -80,8 +80,6 @@ eth_get_block_tx_count_by_hex <- function(block_hex, api_key){
   as.numeric(jsonlite::fromJSON(url)$result)
 }
 
-
-
 # eth_getTransactionByHash
 # Returns the information about a transaction requested by transaction hash
 
