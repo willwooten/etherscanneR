@@ -1,0 +1,4 @@
+Package: etherscanneR
+Type: Package
+Title: API tool for etherscan.io
+Version: 0.0.1.0
